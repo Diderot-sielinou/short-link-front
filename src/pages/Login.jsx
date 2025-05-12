@@ -1,0 +1,100 @@
+// import { useState } from "react";
+import axios from "axios";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { AuthProvider, useAuth } from "../context/authContext";
+import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
+
+
+export default function Login() {
+  const baseApiUrl = import.meta.env.VITE_API_URL;
+  // const navigate  = useNavigate()
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Email invalide").required("Email requis"),
+    password: Yup.string()
+      .matches(/^[a-zA-Z0-9]{3,30}$/)
+      .min(6, "Minimum 6 caractères")
+      .required("Mot de passe requis"),
+  });
+  const { login } = useAuth();
+
+  const onSubmit = async (values, { setSubmitting,  }) => {
+    try {
+      const response = await axios.post(`${baseApiUrl}/api/auth/login`, values);
+      toast.success("login réussie! ✅",{
+        toastId: "success-login"
+      });
+      await login(response.data.token);
+      // navigate("/dashboard")
+    } catch (err) {
+      if (err.response?.data?.message) {
+        toast.error(err.response?.data?.message || "Erreur lors de l’authentification",{
+          toastId: "error-login"
+        });
+        // setErrors({ password: err.response.data.message });
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
+          Connexion
+        </h2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form className="grid gap-4">
+              <div>
+                <label className="block mb-1 text-sm font-medium">Email</label>
+                <Field
+                  name="email"
+                  type="email"
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </div>
+              <div>
+                <label className="block mb-1 text-sm font-medium">
+                  Mot de passe
+                </label>
+                <Field
+                  name="password"
+                  type="password"
+                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+              >
+                Se connecter
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
+  );
+}
