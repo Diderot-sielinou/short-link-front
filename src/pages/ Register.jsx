@@ -37,7 +37,10 @@ export default function Register() {
       .email("Format d'email invalide")
       .required("L'email est requis"),
     password: Yup.string()
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])/,"The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character.")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
+        "The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character."
+      )
       .min(8, "Minimum 6 caractères")
       .max(30)
       .required("Mot de passe requis"),
@@ -73,11 +76,11 @@ export default function Register() {
 
   return (
     <motion.div
-     className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-4"
-     initial={{ opacity: 0, y: 20 }}
-     animate={{ opacity: 1, y: 0 }}
-     transition={{ duration: 0.3 }}
-     >
+      className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-xl">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
           Formulaire d'inscription
