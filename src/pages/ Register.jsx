@@ -37,8 +37,9 @@ export default function Register() {
       .email("Format d'email invalide")
       .required("L'email est requis"),
     password: Yup.string()
-      .matches(/^[a-zA-Z0-9]{3,30}$/)
-      .min(6, "Minimum 6 caractères")
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*])/,"The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character.")
+      .min(8, "Minimum 6 caractères")
+      .max(30)
       .required("Mot de passe requis"),
     repeat_password: Yup.string()
       .oneOf([Yup.ref("password")], "Les mots de passe doivent correspondre")
