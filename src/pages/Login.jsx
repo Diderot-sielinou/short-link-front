@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { AuthProvider, useAuth } from "../context/authContext";
 import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
-
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 export default function Login() {
   const baseApiUrl = import.meta.env.VITE_API_URL;
@@ -44,7 +44,12 @@ export default function Login() {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <motion.div 
+    className="min-h-screen flex items-center justify-center bg-gray-50 px-4"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3 }}
+    >
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
           Connexion
@@ -95,6 +100,6 @@ export default function Login() {
           )}
         </Formik>
       </div>
-    </div>
+    </motion.div>
   );
 }
