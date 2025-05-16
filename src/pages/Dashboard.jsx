@@ -85,18 +85,18 @@ const Dashboard = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="mb-4">
-              <p className="text-sm text-gray-500 truncate">Original</p>
-              <p className="text-green-500  truncate mb-2 text-xs">
+              <p className="text-sm text-gray-500 truncate md:text-3xl">Original</p>
+              <p className="text-green-500  truncate mb-2 md:text-2xl">
                 {link.original_url}
               </p>
 
-              <p className="text-sm text-gray-500">Lien raccourci</p>
-              <p className="text-blue-600 font-medium truncate mb-2 text-xs">
+              <p className="text-sm text-gray-500 md:text-3xl">Lien raccourci</p>
+              <p className="text-blue-600 font-medium truncate mb-2 md:text-2xl">
                 {link.short_link}
               </p>
 
-              <p className="text-sm text-gray-500">Expire </p>
-              <p className="text-gray-700 mb-2">
+              <p className="text-sm text-gray-500 md:text-3xl">Expire </p>
+              <p className="text-gray-700 mb-2 md:text-2xl">
                 {link?.expires_at
                   ? new Date(link?.expires_at).toLocaleString("fr-FR", {
                       day: "2-digit",
@@ -108,12 +108,12 @@ const Dashboard = () => {
                   : "never"}
               </p>
 
-              <p className="text-sm text-gray-500">Nombre de clics</p>
-              <p className="text-gray-700">{link.click_count}</p>
+              <p className="text-sm text-gray-500 md:text-3xl">Nombre de clics</p>
+              <p className="text-gray-700 md:text-2xl">{link.click_count}</p>
             </div>
 
             {copiedId === link.id ? (
-              <span className="text-green-500 text-sm">Copié !</span>
+              <span className="text-green-500 ">Copié !</span>
             ) : (
               <button
                 onClick={() => handleCopy(link.short_link, link.id)}

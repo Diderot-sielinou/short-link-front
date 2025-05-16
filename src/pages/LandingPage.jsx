@@ -7,7 +7,7 @@ import {motion} from 'framer-motion'
 const LandingPage = () => {
   return (
     <section className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <div className="max-w-7xl xl:max-w-[90%] mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* Left content */}
         <motion.div 
         className="w-full md:w-1/2 text-center md:text-left space-y-6"
@@ -16,11 +16,11 @@ const LandingPage = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         
         >
-          <h1 className="lg:text-6xl md:text-5xl  font-bold       text-4xl text-gray-800 leading-tight">
+          <h1 className="lg:text-6xl md:text-5xl  font-bold text-4xl text-gray-800 leading-tight">
             Bienvenue sur ShortLink 🔗{" "}
             <br className="lg:block hidden"/>  
           </h1>
-          <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
+          <p className="text-gray-600 text-lg leading-relaxed max-w-xl md:text-2xl">
             ! 🚀 Transformez vos liens  longs en liens courts, clairs et
             percutants ! Gagnez en professionnalisme, en clarté et en
             performances avec notre outil de raccourcissement d'URL.

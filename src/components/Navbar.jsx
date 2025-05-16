@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -24,7 +25,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <Link to="/welcome" className="text-lg font-bold text-blue-600">
+      <Link to="/welcome" className="text-lg md:text-3xl font-bold text-blue-600">
         ShortLink
       </Link>
       <div className="md:hidden">
@@ -40,25 +41,25 @@ const Navbar = () => {
         <div className="flex flex-col md:flex-row gap-4 items-center">
           {isAuthenticated ? (
             <>
-              <span className="text-gray-700">
+              <span className="text-gray-700 md:text-2xl">
                 Bonjour <strong>{user?.first_name}</strong>
               </span>
-              <Link to="/dashboard" onClick={handleLinkClick} className="text-blue-500 hover:underline">
+              <Link to="/dashboard" onClick={handleLinkClick} className="text-blue-500 hover:underline md:text-2xl">
                 Dashboard
               </Link>
               <button
                 onClick={logout}
-                className="bg-red-500 text-white px-2 py-1 text-[12px] rounded hover:bg-red-600 md:px-4"
+                className="bg-red-500 text-white px-2 py-1 text-[12px] rounded hover:bg-red-600 md:px-4 md:text-2xl"
               >
                 Déconnexion
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" onClick={handleLinkClick} className="text-blue-500 hover:underline">
+              <Link to="/login" onClick={handleLinkClick} className="text-blue-500 hover:underline md:text-2xl">
                 Connexion
               </Link>
-              <Link to="/register" onClick={handleLinkClick} className="text-blue-500 hover:underline">
+              <Link to="/register" onClick={handleLinkClick} className="text-blue-500 hover:underline md:text-2xl">
                 Inscription
               </Link>
             </>
