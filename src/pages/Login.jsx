@@ -18,7 +18,6 @@ export default function Login() {
   const validationSchema = Yup.object({
     email: Yup.string().email("Email invalide").required("Email requis"),
     password: Yup.string()
-      .matches(/^[a-zA-Z0-9]{3,30}$/)
       .min(6, "Minimum 6 caractères")
       .required("Mot de passe requis"),
   });
