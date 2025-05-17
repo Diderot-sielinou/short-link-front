@@ -23,33 +23,54 @@ export default function Login() {
   });
   const { login } = useAuth();
 
-  const onSubmit = async (values, { setSubmitting,  }) => {
+  const onSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post(`${baseApiUrl}/api/auth/login`, values);
-      toast.success("login réussie! ✅",{
-        toastId: "success-login"
+      toast.success("login réussie! ✅", {
+        toastId: "success-login",
       });
       await login(response.data.token);
       // navigate("/dashboard")
     } catch (err) {
       if (err.response?.data?.message) {
-        toast.error(err.response?.data?.message || "Erreur lors de l’authentification",{
-          toastId: "error-login"
-        });
+        toast.error(
+          err.response?.data?.message || "Erreur lors de l’authentification",
+          {
+            toastId: "error-login",
+          }
+        );
         // setErrors({ password: err.response.data.message });
       }
     } finally {
       setSubmitting(false);
     }
   };
+
+  const handleGoogleLogin = () => {
+    window.location.href = "https://linked.up.railway.app/api/auth/google"; // ton back-end
+  };
+
   return (
-    <motion.div 
-    className="min-h-screen flex items-center justify-center bg-gray-50 px-4"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3 }}
+    <motion.div
+      className="min-h-screen flex items-center justify-center bg-gray-50 px-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="flex items-center my-2 justify-center gap-3 w-full md:w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-xl shadow-sm hover:shadow-md transition duration-200 bg-white text-gray-700 hover:bg-gray-50"
+        >
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          <span className="text-sm font-medium">Se connecter avec Google</span>
+        </button>
+
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
           Connexion
         </h2>

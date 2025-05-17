@@ -13,6 +13,12 @@ export const AuthProvider = ({ children }) => {
   const baseApiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const authToken = params.get("token");
+    if (authToken) {
+      localStorage.setItem("token", authToken);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
     const token = localStorage.getItem("token");
     if (token) {
       axios
@@ -39,10 +45,10 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.get(`${baseApiUrl}/api/user/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(res.data?.results)
+      console.log(res.data?.results);
       setUser(res.data?.results);
       setIsAuthenticated(true);
-      navigate("/dashboard")
+      navigate("/dashboard");
     } catch (err) {
       console.error(
         err.response?.data?.message ||
