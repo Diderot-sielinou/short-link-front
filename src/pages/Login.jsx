@@ -47,7 +47,7 @@ export default function Login() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "https://linked.up.railway.app/api/auth/google"; // ton back-end
+    window.location.href = "https://linked.up.railway.app/api/auth/google"; 
   };
 
   return (
@@ -70,6 +70,8 @@ export default function Login() {
           />
           <span className="text-sm font-medium">Se connecter avec Google</span>
         </button>
+        {/* <a href="http://localhost:4000/api/auth/google">Connexion avec Google</a> */}
+
 
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
           Connexion

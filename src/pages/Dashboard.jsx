@@ -41,9 +41,7 @@ const Dashboard = () => {
             "Content-Type": "application/json",
           },
         });
-        console.log("resuts", response.data?.results);
         setUrls(response.data?.results);
-        // console.log(response.data.message)
       } catch (err) {
         console.error(
           err.response?.data?.message || "Erreur lors du chargement des liens."

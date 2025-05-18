@@ -15,11 +15,15 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const authToken = params.get("token");
+    console.log("new token", authToken);
     if (authToken) {
       localStorage.setItem("token", authToken);
+      console.log("new token", authToken);
+
       window.history.replaceState({}, document.title, window.location.pathname);
     }
     const token = localStorage.getItem("token");
+    console.log("token ff",token)
     if (token) {
       axios
         .get(`${baseApiUrl}/api/user/profile`, {
@@ -27,6 +31,7 @@ export const AuthProvider = ({ children }) => {
         })
         .then((res) => {
           setUser(res.data?.results);
+          console.log(res.data?.results)
           setIsAuthenticated(true);
         })
         .catch(() => {
